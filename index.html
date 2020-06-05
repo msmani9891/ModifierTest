@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+    <style>
+        h1 {color: red;}
+    
+        li{
+        list-style-type: none;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 100px;
+        display: inline-block;
+        }
+    </style>
+   </head>
+     <body>
+        <!-- <script id="breadcrumb_template" type="text/x-handlebars-template">
+                    <div class="row-fluid">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <br />
+                    <div class="list-group">
+                        <a class="list-group-item active">
+                       
+                        </a>
+                        <ul>
+                        
+                    {{#each breadcrumb}}
+                        <li><a href="#" id="detailsbtn" onclick="breadcrumb({{@index}},{{level}})" data-id="{{@index}}" class="list-group-item">{{name}}</a></li>
+                    {{/each}}
+                    </div>
+            
+                    </div>
+            
+                    </div>
+            
+                    </script> -->
+
+
+<script id="category_template" type="text/x-handlebars-template">
+    <div class="row-fluid">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+    <br />
+    <div class="list-group">
+        <a class="list-group-item active">
+       
+        </a>
+        <ul>
+        
+    {{#each treeStruct}}
+        <li><a href="#" id="detailsbtn" onclick="templatefun({{@index}},{{level}})" data-id="{{@index}}" class="list-group-item">{{name}}</a></li>
+    {{/each}}
+    </div>
+
+    </div>
+
+    </div>
+
+    </script>
+
+<div id="breadcrumb">
+</div>
+<div id="content">
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+
+<script type="text/javascript"  src="index.js"></script>
+
+        
+
+   </body>   
+ </html>
+
+
+
