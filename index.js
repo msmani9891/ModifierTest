@@ -156,22 +156,16 @@ var context = {
       }       
   }
 
-  backtoItem = function(index, level){
-    var item =  context.treeStruct.filter(function(itm) {
-      console.log(itm);
-      return itm.level == level;
-    });
-    console.log(context.treeStruct,"********");
-    // console.log(context.treeStruct[index]);
-    var new_array = context.breadCrumb.slice(0, index + 1 );
-    // context = {   
-    //   "breadCrumb": new_array,
-    //   "treeStruct": context.treeStruct[index].children ? [...context.treeStruct[index].children] : ""
-    // }              
-    // html = template(context.treeStruct);
-    // bcHtml = template(context);              
-    //  $("#content").html(html);               
-    //  $("#breadcrumb").html(bcHtml);
+  backtoItem = function(index, level){  
+    var bc_updated = context.breadCrumb.slice(0, index + 1 );
+    context = {   
+      "breadCrumb": bc_updated,
+      "treeStruct": context.treeStruct[index].children ? [...context.treeStruct[index].children] : ""
+    }              
+    html = template(context.treeStruct);
+    bcHtml = template(context);              
+     $("#content").html(html);               
+     $("#breadcrumb").html(bcHtml);
   };
 
   
