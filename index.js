@@ -1,7 +1,7 @@
 
 
 var context = {
-    "breadcrumb": [],
+    "breadCrumb": [],
     "treeStruct" : [{
     "id": "1",
     "name": "Pizza",
@@ -114,37 +114,65 @@ var context = {
   }]
   }
   
-//   var source1   = $("#breadcrumb_template").html();
-//   var template1 = Handlebars.compile(source1);
+  
   
   var source   = $("#category_template").html();
   var template = Handlebars.compile(source);
   
+  var bcSource   = $("#breadcrumb_template").html();
+  var bcTemplate = Handlebars.compile(bcSource);
+
   //render the data into the template
   var html = template(context);
-//   html = template1(context);
+  var bcHtml = bcTemplate(context);
   
   //put the rendered data into DOM
   $("#content").html(html);
-//   $("#breadcrumb").html(html);
+  $("#breadcrumb").html(bcHtml);
   //onclick function for home page species menu
   
   
   templatefun = function(i, a){
       var index = i;
-      for(i=0; i < context.treeStruct.length; i++){
-         if(index === i){
-              context = {
-               //"breadcrumb": [...context.treeStruct],
-               "treeStruct": [...context.treeStruct[index].children]
-             }
-              html = template(context);
-              $("#content").html(html);
-              //$("#breadcrumb").html(html);
-         }
+      context.breadCrumb.push(context.treeStruct[i]);      
+      if(context.treeStruct){
+        for(i=0; i < context.treeStruct.length; i++){
+          if(index === i){
+            if(context.treeStruct);
+              
+               context = {   
+                "breadCrumb": context.breadCrumb,
+                "treeStruct": context.treeStruct[index].children ? [...context.treeStruct[index].children] : ""
+              }              
+              html = template(context.treeStruct);
+              bcHtml = template(context);              
+               $("#content").html(html);               
+               $("#breadcrumb").html(bcHtml);
+          }
+       }
       }
-    //  console.log(context.breadcrumb);
+      else {
+        return context;
+      }       
   }
-  
+
+  backtoItem = function(index, level){
+    var item =  context.treeStruct.filter(function(itm) {
+      console.log(itm);
+      return itm.level == level;
+    });
+    console.log(context.treeStruct,"********");
+    // console.log(context.treeStruct[index]);
+    var new_array = context.breadCrumb.slice(0, index + 1 );
+    // context = {   
+    //   "breadCrumb": new_array,
+    //   "treeStruct": context.treeStruct[index].children ? [...context.treeStruct[index].children] : ""
+    // }              
+    // html = template(context.treeStruct);
+    // bcHtml = template(context);              
+    //  $("#content").html(html);               
+    //  $("#breadcrumb").html(bcHtml);
+  };
+
   
   
