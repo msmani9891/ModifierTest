@@ -73,7 +73,7 @@ content: "";
                                 {{#if children}}
                                 <div href="#" id="detailsbtn" onclick="templatefun({{@index}}, {{level}})" data-id="{{@index}}" class="list-group-item">{{name}}</div>
                                 {{else }}
-                                <input class="checkbox" id="lists[{{name}}]" type="checkbox" name="lists[{{name}}]" />
+                                <input class="checkbox" id="lists[{{name}}]" onclick="itemSelected('{{name}}', {{level}})" {{#if selected}}checked{{/if}} type="checkbox" name="lists[{{name}}]" />
                                 <label for="lists[{{name}}]"><span class="check">✓</span> {{name}}</label>
                                 {{/if}}
                             </li>

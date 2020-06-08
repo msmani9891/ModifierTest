@@ -22,17 +22,20 @@ var context = {
               {
                 "id": "1",
                 "name": "Olives",
-                "level": 4
+                "level": 4,
+                "selected": false
               },
               {
                 "id": "2",
                 "name": "Tomato",
-                "level": 4
+                "level": 4,
+                "selected": false
               },
               {
                 "id": "3",
                 "name": "Jalapeno",
-                "level": 4
+                "level": 4,
+                "selected": false
               },
               {
                 "id": "4",
@@ -43,17 +46,20 @@ var context = {
                   {
                     "id": "1",
                     "name": "Mushroom",
-                    "level": 5
+                    "level": 5,
+                    "selected": false
                   },
                   {
                     "id": "2",
                     "name": "Asparagus",
-                    "level": 5
+                    "level": 5,
+                    "selected": false
                   },
                   {
                     "id": "3",
                     "name": "Corn",
-                    "level": 5
+                    "level": 5,
+                    "selected": false
                   },
                   {
                     "id": "4",
@@ -64,22 +70,26 @@ var context = {
                       {
                         "id": "1",
                         "name": "Tikka",
-                        "level": 6
+                        "level": 6,
+                        "selected": false
                       },
                       {
                         "id": "2",
                         "name": "South Twist",
-                        "level": 6
+                        "level": 6,
+                        "selected": false
                       },
                       {
                         "id": "3",
                         "name": "Scrambled",
-                        "level": 6
+                        "level": 6,
+                        "selected": false
                       },
                       {
                         "id": "4",
                         "name": "Fried",
-                        "level": 6
+                        "level": 6,
+                        "selected": false
                       },
                      
                     ]
@@ -91,24 +101,28 @@ var context = {
           {
             "id": "2",
             "name": "Veg 1",
-            "level": 3
+            "level": 3,
+            "selected": false
           },
           {
             "id": "3",
             "name": "non-veg",
-            "level": 3
+            "level": 3,
+            "selected": false
           }
         ]
       },
       {
         "id": "2",
         "name": "Toppings",
-        "level": 2
+        "level": 2,
+        "selected": false
       },
       {
         "id": "3",
         "name": "Sides",
-        "level": 2
+        "level": 2,
+        "selected": true
       }
     ]
   }], 
@@ -134,12 +148,11 @@ var context = {
   
   
   templatefun = function(i, a){
-      var index = i;
-      console.log(a);
+      var index = i;      
     var found_names = $.grep(context.treeStruct, function(v) {
         return [v.level === a];
     });
-    console.log(found_names,"*****",context)
+    
       context.breadCrumb.push(context.treeStruct[i]);
       context.jumpToItem.push(context.treeStruct[i]);
       if(context.treeStruct){
@@ -175,6 +188,19 @@ var context = {
      $("#content").html(html);               
      $("#breadcrumb").html(bcHtml);
   };
+
+
+  itemSelected = function(name, level){    
+    var found_names = $.grep(context.treeStruct, function(v) {
+      console.log(v.level, v.name);
+      // console.log(v.level === level);
+        if(v.level === parseInt(level) && v.name === name){
+          console.log(v.selected);
+          v.selected = !v.selected;
+          console.log(v.selected);
+        }
+    });    
+  }
 
   
   
