@@ -111,7 +111,8 @@ var context = {
         "level": 2
       }
     ]
-  }]
+  }], 
+  "jumpToItem": []
   }
   
   
@@ -134,16 +135,22 @@ var context = {
   
   templatefun = function(i, a){
       var index = i;
-      context.breadCrumb.push(context.treeStruct[i]);      
+      console.log(a);
+    var found_names = $.grep(context.treeStruct, function(v) {
+        return [v.level === a];
+    });
+    console.log(found_names,"*****",context)
+      context.breadCrumb.push(context.treeStruct[i]);
+      context.jumpToItem.push(context.treeStruct[i]);
       if(context.treeStruct){
         for(i=0; i < context.treeStruct.length; i++){
           if(index === i){
             if(context.treeStruct);
-              
                context = {   
                 "breadCrumb": context.breadCrumb,
-                "treeStruct": context.treeStruct[index].children ? [...context.treeStruct[index].children] : ""
-              }              
+                "treeStruct": context.treeStruct[index].children ? [...context.treeStruct[index].children] : "",
+                "jumpToItem": context.jumpToItem
+              }
               html = template(context.treeStruct);
               bcHtml = template(context);              
                $("#content").html(html);               
@@ -157,11 +164,12 @@ var context = {
   }
 
   backtoItem = function(index, level){  
-    var bc_updated = context.breadCrumb.slice(0, index + 1 );
+    var bc_updated = context.breadCrumb.slice(0, index + 1 );    
     context = {   
       "breadCrumb": bc_updated,
-      "treeStruct": context.treeStruct[index].children ? [...context.treeStruct[index].children] : ""
-    }              
+      "treeStruct": context.jumpToItem[index].children,
+      "jumpToItem": context.jumpToItem
+    }
     html = template(context.treeStruct);
     bcHtml = template(context);              
      $("#content").html(html);               
